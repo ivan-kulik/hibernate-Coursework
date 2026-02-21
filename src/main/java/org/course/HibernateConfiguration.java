@@ -35,6 +35,7 @@ public class HibernateConfiguration {
                 .addPackage("org.course")
                 .addAnnotatedClass(Client.class)
                 .addAnnotatedClass(Profile.class)
+                .addAnnotatedClass(Order.class)
                 .setProperty("hibernate.connection.driver_class", "org.postgresql.Driver")
                 .setProperty("hibernate.connection.url", connectionURL)
                 .setProperty("hibernate.connection.username", connectionUsername)
