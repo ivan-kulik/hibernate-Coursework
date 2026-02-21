@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
+import org.course.entity.Client;
+
 @Configuration
 @PropertySource("classpath:application.properties")
 public class HibernateConfiguration {
@@ -31,6 +33,7 @@ public class HibernateConfiguration {
 
         configuration
                 .addPackage("org.course")
+                .addAnnotatedClass(Client.class)
                 .setProperty("hibernate.connection.driver_class", "org.postgresql.Driver")
                 .setProperty("hibernate.connection.url", connectionURL)
                 .setProperty("hibernate.connection.username", connectionUsername)
