@@ -1,6 +1,10 @@
 package org.course.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Id;
 import jakarta.persistence.Column;
@@ -13,6 +17,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "clients")
@@ -40,6 +45,10 @@ public class Client {
             nullable = false)
     @CreationTimestamp
     private LocalDate registrationDate;
+
+    @OneToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn
+    private Profile profile;
 
     public Client(String name, String email) {
         this.name = name;
