@@ -17,6 +17,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -49,6 +50,9 @@ public class Client {
     @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn
     private Profile profile;
+
+    @OneToMany(mappedBy = "client")
+    private List<Order> orders = new ArrayList<>();
 
     public Client(String name, String email) {
         this.name = name;
