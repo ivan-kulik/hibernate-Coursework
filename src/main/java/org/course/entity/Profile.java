@@ -6,13 +6,21 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "profiles")
+@Getter
+@Setter
+@NoArgsConstructor
 public class Profile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Setter(AccessLevel.NONE)
     private Long id;
 
     @Column(name = "address")
@@ -21,34 +29,8 @@ public class Profile {
     @Column(name = "phone")
     private String phone;
 
-    public Profile() {};
-
     public Profile(String address, String phone) {
         this.address = address;
         this.phone = phone;
-    }
-
-    public Long getId() {
-        return this.id;
-    }
-
-    public void setId(Long newId) {
-        this.id = newId;
-    }
-
-    public String getAddress() {
-        return this.address;
-    }
-
-    public void setAddress(String newAddress) {
-        this.address = newAddress;
-    }
-
-    public String getPhone() {
-        return this.phone;
-    }
-
-    public void setPhone(String newPhone) {
-        this.phone = newPhone;
     }
 }
