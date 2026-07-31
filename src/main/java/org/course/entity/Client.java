@@ -3,6 +3,8 @@ package org.course.entity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -18,7 +20,9 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "clients")
@@ -53,6 +57,20 @@ public class Client {
 
     @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "client_coupons",
+            joinColumns = @JoinColumn(
+                    name = "client_id",
+                    referencedColumnName = "id"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "coupon_id",
+                    referencedColumnName = "id"
+            )
+    )
+    private Set<Coupon> coupons = new HashSet<>();
 
     public Client(String name, String email) {
         this.name = name;
