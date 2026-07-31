@@ -26,7 +26,7 @@ public class Profile {
     @Column(name = "address")
     private String address;
 
-    @Column(name = "phone")
+    @Column(name = "phone", unique = true)
     private String phone;
 
     public Profile(String address, String phone) {

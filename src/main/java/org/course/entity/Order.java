@@ -2,6 +2,8 @@ package org.course.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,13 +27,14 @@ public class Order {
     @Setter(AccessLevel.NONE)
     private Long id;
 
-    @Column(name = "order_date")
+    @Column(name = "order_date", nullable = false)
     private LocalDate orderDate;
 
-    @Column(name = "total_amount")
+    @Column(name = "total_amount", nullable = false)
     private Integer totalAmount;
 
-    @Column(name = "status")
+    @Column(name = "status", nullable = false)
+    @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
     public Order(Integer totalAmount, OrderStatus status) {

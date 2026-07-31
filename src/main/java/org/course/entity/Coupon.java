@@ -23,10 +23,10 @@ public class Coupon {
     @Setter(AccessLevel.NONE)
     private Long id;
 
-    @Column(name = "code")
+    @Column(name = "code", nullable = false)
     private String code;
 
-    @Column(name = "discount")
+    @Column(name = "discount", nullable = false)
     private Float discount;
 
     public Coupon(String code, Float discount) {

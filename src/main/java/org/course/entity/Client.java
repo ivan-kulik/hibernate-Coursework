@@ -10,6 +10,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
 
@@ -25,13 +26,19 @@ public class Client {
     @Setter(AccessLevel.NONE)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name",
+            nullable = false,
+            unique = true)
     private String name;
 
-    @Column(name = "email")
+    @Column(name = "email",
+            nullable = false,
+            unique = true)
     private String email;
 
-    @Column(name = "registration_date")
+    @Column(name = "registration_date",
+            nullable = false)
+    @CreationTimestamp
     private LocalDate registrationDate;
 
     public Client(String name, String email) {
