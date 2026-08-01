@@ -75,6 +75,5 @@ public class Client {
     public Client(String name, String email) {
         this.name = name;
         this.email = email;
-        this.registrationDate = LocalDate.now();
     }
 }
