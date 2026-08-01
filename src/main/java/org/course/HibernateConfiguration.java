@@ -28,7 +28,7 @@ public class HibernateConfiguration {
     private String hbm2ddlAuto;
 
     @Bean
-    public SessionFactory getSessionFactory() {
+    public SessionFactory sessionFactory() {
         org.hibernate.cfg.Configuration configuration = new org.hibernate.cfg.Configuration();
 
         configuration
