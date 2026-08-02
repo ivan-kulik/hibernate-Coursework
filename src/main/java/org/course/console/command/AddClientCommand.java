@@ -1,4 +1,4 @@
-package org.course.command;
+package org.course.console.command;
 
 import org.course.console.util.ConsoleInputReader;
 import org.course.service.ClientService;

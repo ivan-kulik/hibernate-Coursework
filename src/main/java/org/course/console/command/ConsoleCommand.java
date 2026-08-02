@@ -1,4 +1,4 @@
-package org.course.command;
+package org.course.console.command;
 
 import java.util.Scanner;
 
