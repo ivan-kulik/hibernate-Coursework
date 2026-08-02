@@ -2,6 +2,7 @@ package org.course.entity;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
@@ -51,8 +52,11 @@ public class Client {
     @CreationTimestamp
     private LocalDate registrationDate;
 
-    @OneToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn
+    @OneToOne(
+            mappedBy = "client",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
     private Profile profile;
 
     @OneToMany(mappedBy = "client")

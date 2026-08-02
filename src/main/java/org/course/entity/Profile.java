@@ -2,9 +2,12 @@ package org.course.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
@@ -30,7 +33,9 @@ public class Profile {
     @Column(name = "phone", unique = true)
     private String phone;
 
-    @OneToOne(mappedBy = "profile")
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
+    @JoinColumn(name = "client_id")
     private Client client;
 
     public Profile(String address, String phone) {
