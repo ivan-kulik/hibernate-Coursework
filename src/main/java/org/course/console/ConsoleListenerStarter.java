@@ -19,6 +19,7 @@ public class ConsoleListenerStarter {
     @PostConstruct
     public void postConstruct() {
         this.listenerThread = new Thread(this.consoleListener::run);
+        this.listenerThread.start();
     }
 
     @PreDestroy
