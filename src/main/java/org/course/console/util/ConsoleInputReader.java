@@ -31,6 +31,7 @@ public final class ConsoleInputReader {
 
                 if (validator != null && !validator.test(value)) {
                     System.out.println(validatorErrorMessage);
+                    continue;
                 }
 
                 if (businessValidator != null) {
