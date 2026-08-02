@@ -80,4 +80,11 @@ public class Client {
         this.name = name;
         this.email = email;
     }
+
+    public void setProfile(Profile profile) {
+        if (profile != null) {
+            profile.setClient(this);
+        }
+        this.profile = profile;
+    }
 }
