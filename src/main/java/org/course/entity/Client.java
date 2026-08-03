@@ -59,7 +59,12 @@ public class Client {
     )
     private Profile profile;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(
+            mappedBy = "client",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @Setter(AccessLevel.NONE)
     private List<Order> orders = new ArrayList<>();
 
     @ManyToMany
@@ -86,5 +91,15 @@ public class Client {
             profile.setClient(this);
         }
         this.profile = profile;
+    }
+
+    public void addOrder(Order order) {
+        this.orders.add(order);
+        order.setClient(this);
+    }
+
+    public void removeOrder(Order order) {
+        this.orders.remove(order);
+        order.setClient(null);
     }
 }
