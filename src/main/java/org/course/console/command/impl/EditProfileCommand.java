@@ -21,7 +21,7 @@ public class EditProfileCommand implements ConsoleCommand {
 
     @Override
     public void execute(Scanner scanner) {
-        String name = readName(scanner);
+        String name = readClientName(scanner);
         Client client = this.clientService.findClientByName(name);
         if (client == null) {
             System.out.printf("Client with name=%s does not exist. \n", name);
@@ -31,16 +31,16 @@ public class EditProfileCommand implements ConsoleCommand {
         System.out.println("Leave the field empty (press Enter) to keep the current value.");
 
         String currentAddress = client.getProfile().getAddress();
-        String newAddress = askForNewAddress(scanner, currentAddress);
+        String newAddress = readNewAddress(scanner, currentAddress);
 
         String currentPhone = client.getProfile().getPhone();
-        String newPhone = askForNewPhone(scanner, currentPhone);
+        String newPhone = readNewUniquePhone(scanner, currentPhone);
 
         this.clientService.updateProfile(client.getId(), newAddress, newPhone);
         System.out.println("Client's profile was successfully edited.");
     }
 
-    private String readName(Scanner scanner) {
+    private String readClientName(Scanner scanner) {
         return ConsoleInputReader.readInputLineWithValidation(
                 scanner,
                 "Enter a client name to edit profile: ",
@@ -50,7 +50,7 @@ public class EditProfileCommand implements ConsoleCommand {
         );
     }
 
-    private String askForNewAddress(Scanner scanner, String currentAddress) {
+    private String readNewAddress(Scanner scanner, String currentAddress) {
         String prompt = String.format("Enter new address (current: %s): ", currentAddress);
 
         String input = ConsoleInputReader.readInputLineWithValidation(
@@ -63,7 +63,7 @@ public class EditProfileCommand implements ConsoleCommand {
         return input.isBlank() ? currentAddress : input;
     }
 
-    private String askForNewPhone(Scanner scanner, String currentPhone) {
+    private String readNewUniquePhone(Scanner scanner, String currentPhone) {
         String prompt = String.format("Enter new phone (current: %s): ", currentPhone);
 
         String input = ConsoleInputReader.readInputLineWithValidation(
