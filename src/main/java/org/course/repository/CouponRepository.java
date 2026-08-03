@@ -32,12 +32,32 @@ public class CouponRepository {
         });
     }
 
+    public Coupon findById(Long couponId) {
+        return this.transactionExecutor.executeInTransaction(session -> {
+            String hqlQuery = """
+                    select c from Coupon c
+                    where c.id = :id
+                    """;
+            return session.createQuery(hqlQuery, Coupon.class)
+                    .setParameter("id", couponId)
+                    .uniqueResult();
+        });
+    }
+
     public void assignCouponToClient(Long clientId, Long couponId) {
         this.transactionExecutor.executeInTransaction(session -> {
             Client client = session.get(Client.class, clientId);
             Coupon couponRef = session.getReference(Coupon.class, couponId);
 
             client.addCoupon(couponRef);
+        });
+    }
+
+    public void update(Long id, String code, Float discount) {
+        this.transactionExecutor.executeInTransaction(session -> {
+            Coupon coupon = session.get(Coupon.class, id);
+            coupon.setCode(code);
+            coupon.setDiscount(discount);
         });
     }
 }
