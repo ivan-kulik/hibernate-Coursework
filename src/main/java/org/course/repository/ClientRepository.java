@@ -56,6 +56,26 @@ public class ClientRepository {
         });
     }
 
+    public Client findByName(String name) {
+        return this.transactionExecutor.executeInTransaction(session -> {
+            String hqlQuery = """
+                select c from Client c
+                where c.name = :name
+                """;
+            return session.createQuery(hqlQuery, Client.class)
+                    .setParameter("name", name)
+                    .uniqueResult();
+        });
+    }
+
+    public void updateProfile(Long clientId, String newAddress, String newPhone) {
+        this.transactionExecutor.executeInTransaction(session -> {
+            Client client = session.get(Client.class, clientId);
+            client.getProfile().setAddress(newAddress);
+            client.getProfile().setPhone(newPhone);
+        });
+    }
+
     public boolean deleteByName(String name) {
         return this.transactionExecutor.executeInTransaction(session -> {
             String hqlQuery = """
