@@ -27,7 +27,7 @@ public class Coupon {
     @Setter(AccessLevel.NONE)
     private Long id;
 
-    @Column(name = "code", nullable = false)
+    @Column(name = "code", unique = true, nullable = false)
     private String code;
 
     @Column(name = "discount", nullable = false)
