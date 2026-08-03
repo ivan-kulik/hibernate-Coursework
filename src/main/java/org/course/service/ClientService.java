@@ -41,4 +41,8 @@ public class ClientService {
     public boolean isProfileExistByPhone(String phone) {
         return this.clientRepository.existsByPhone(phone);
     }
+
+    public boolean deleteClientByName(String name) {
+        return this.clientRepository.deleteByName(name);
+    }
 }
