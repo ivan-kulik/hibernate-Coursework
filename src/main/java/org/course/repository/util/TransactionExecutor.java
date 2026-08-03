@@ -20,8 +20,10 @@ public class TransactionExecutor {
 
     public void executeInTransaction(Consumer<Session> action) {
         Transaction transaction = null;
+        Session session = null;
 
-        try (Session session = this.sessionFactory.openSession()) {
+        try {
+            session = this.sessionFactory.openSession();
             transaction = session.getTransaction();
 
             transaction.begin();
@@ -32,13 +34,19 @@ public class TransactionExecutor {
                 transaction.rollback();
             }
             throw exception;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 
     public<T> T executeInTransaction(Function<Session, T> action) {
         Transaction transaction = null;
+        Session session = null;
 
-        try (Session session = this.sessionFactory.openSession()) {
+        try {
+            session = this.sessionFactory.openSession();
             transaction = session.getTransaction();
 
             transaction.begin();
@@ -51,6 +59,10 @@ public class TransactionExecutor {
                 transaction.rollback();
             }
             throw exception;
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 }
