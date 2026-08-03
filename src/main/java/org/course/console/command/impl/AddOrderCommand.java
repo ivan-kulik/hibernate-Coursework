@@ -28,21 +28,21 @@ public class AddOrderCommand implements ConsoleCommand {
 
     @Override
     public void execute(Scanner scanner) {
-        String name = readName(scanner);
+        String name = readClientName(scanner);
         Client client = this.clientService.findClientByName(name);
         if (client == null) {
             System.out.printf("Client with name=%s does not exist. \n", name);
             return;
         }
 
-        LocalDate orderDate = askForOrderDate(scanner);
-        Integer totalAmount = askForTotalAmount(scanner);
+        LocalDate orderDate = readOrderDate(scanner);
+        Integer totalAmount = readTotalAmount(scanner);
         Long orderId = this.orderService.createOrder(client.getId(), orderDate, totalAmount);
 
         System.out.printf("Order with id=%d was successfully saved. \n", orderId);
     }
 
-    private String readName(Scanner scanner) {
+    private String readClientName(Scanner scanner) {
         return ConsoleInputReader.readInputLineWithValidation(
                 scanner,
                 "Enter a client name to add order: ",
@@ -52,7 +52,7 @@ public class AddOrderCommand implements ConsoleCommand {
         );
     }
 
-    private LocalDate askForOrderDate(Scanner scanner) {
+    private LocalDate readOrderDate(Scanner scanner) {
         return ConsoleInputReader.readInputLineWithValidation(
                 scanner,
                 "Enter a order date in format 'yyyy-MM-dd': ",
@@ -63,7 +63,7 @@ public class AddOrderCommand implements ConsoleCommand {
         );
     }
 
-    private Integer askForTotalAmount(Scanner scanner) {
+    private Integer readTotalAmount(Scanner scanner) {
         return ConsoleInputReader.readInputLineWithValidation(
                 scanner,
                 "Enter a total amount: ",
