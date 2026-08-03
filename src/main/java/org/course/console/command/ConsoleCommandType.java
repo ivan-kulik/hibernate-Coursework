@@ -14,6 +14,8 @@ public enum ConsoleCommandType {
 
     EDIT_COUPON,
 
+    ASSIGN_COUPON,
+
     FIND_ORDERS,
 
     EXIT,
