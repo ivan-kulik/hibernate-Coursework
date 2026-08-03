@@ -51,7 +51,7 @@ public class AddClientCommand implements ConsoleCommand {
                 Function.identity(),
                 null,
                 input -> input.endsWith("@gmail.com"),
-                "Invalid format of email.",
+                "Invalid format of email. Must end with '@gmail.com'.",
                 input -> {
                     if (this.clientService.isClientExistByEmail(input)) {
                         throw new IllegalArgumentException("Client with this email already exists.");
@@ -76,7 +76,7 @@ public class AddClientCommand implements ConsoleCommand {
                 Function.identity(),
                 null,
                 input -> input.chars().allMatch(Character::isDigit),
-                "Phone number must ...",
+                "Phone number must contain only digits.",
                 input -> {
                     if (this.clientService.isProfileExistByPhone(input)) {
                         throw new IllegalArgumentException("Client with this phone already exists.");

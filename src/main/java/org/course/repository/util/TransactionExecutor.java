@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+/// Or use @PersistenceContext with EntityManager and @Transactional with services
 @Component
 public class TransactionExecutor {
 
