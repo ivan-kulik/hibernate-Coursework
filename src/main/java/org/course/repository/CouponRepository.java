@@ -20,6 +20,18 @@ public class CouponRepository {
         });
     }
 
+    public boolean existById(Long id) {
+        return this.transactionExecutor.executeInTransaction(session -> {
+            String hqlQuery = """
+                select count(c) from Coupon c
+                where c.id = :id
+                """;
+            return session.createQuery(hqlQuery, Long.class)
+                    .setParameter("id", id)
+                    .uniqueResult() > 0;
+        });
+    }
+
     public boolean existByCode(String code) {
         return this.transactionExecutor.executeInTransaction(session -> {
             String hqlQuery = """

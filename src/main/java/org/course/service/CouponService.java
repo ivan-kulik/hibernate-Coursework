@@ -19,6 +19,10 @@ public class CouponService {
         return coupon.getId();
     }
 
+    public boolean existById(Long id) {
+        return this.couponRepository.existById(id);
+    }
+
     public boolean existByCode(String code) {
         return this.couponRepository.existByCode(code);
     }
