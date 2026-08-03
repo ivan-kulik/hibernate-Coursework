@@ -1,5 +1,6 @@
 package org.course.console.util;
 
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -40,7 +41,7 @@ public final class ConsoleInputReader {
                 }
 
                 return value;
-            } catch (NumberFormatException exception) {
+            } catch (NumberFormatException | DateTimeParseException exception) {
                 System.out.println(parserErrorMessage);
             } catch (IllegalArgumentException exception) {
                 System.out.println(exception.getMessage());
