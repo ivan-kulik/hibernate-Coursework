@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -39,12 +40,16 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
-    @ManyToOne
-    @JoinColumn
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client_id", nullable = false)
     private Client client;
 
-    public Order(Integer totalAmount, OrderStatus status) {
-        this.orderDate = LocalDate.now();
+    public Order(
+            LocalDate orderDate,
+            Integer totalAmount,
+            OrderStatus status
+    ) {
+        this.orderDate = orderDate;
         this.totalAmount = totalAmount;
         this.status = status;
     }
