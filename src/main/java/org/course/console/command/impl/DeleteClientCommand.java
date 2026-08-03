@@ -32,6 +32,7 @@ public class DeleteClientCommand implements ConsoleCommand {
         return ConsoleInputReader.readInputLineWithValidation(
                 scanner,
                 "Enter a client name to delete: ",
+                false,
                 Function.identity(),
                 null, null, null, null
         );

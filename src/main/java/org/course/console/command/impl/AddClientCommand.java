@@ -34,6 +34,7 @@ public class AddClientCommand implements ConsoleCommand {
         return ConsoleInputReader.readInputLineWithValidation(
                 scanner,
                 "Enter the name: ",
+                false,
                 Function.identity(),
                 null, null, null,
                 input -> {
@@ -48,6 +49,7 @@ public class AddClientCommand implements ConsoleCommand {
         return ConsoleInputReader.readInputLineWithValidation(
                 scanner,
                 "Enter the email: ",
+                false,
                 Function.identity(),
                 null,
                 input -> input.endsWith("@gmail.com"),
@@ -64,6 +66,7 @@ public class AddClientCommand implements ConsoleCommand {
         return ConsoleInputReader.readInputLineWithValidation(
                 scanner,
                 "Enter the address: ",
+                false,
                 Function.identity(),
                 null, null, null, null
         );
@@ -73,6 +76,7 @@ public class AddClientCommand implements ConsoleCommand {
         return ConsoleInputReader.readInputLineWithValidation(
                 scanner,
                 "Enter the phone: ",
+                false,
                 Function.identity(),
                 null,
                 input -> input.chars().allMatch(Character::isDigit),

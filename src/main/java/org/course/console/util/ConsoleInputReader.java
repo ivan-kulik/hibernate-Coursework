@@ -12,6 +12,7 @@ public final class ConsoleInputReader {
     public static <T> T readInputLineWithValidation(
             Scanner scanner,
             String consoleMessage,
+            boolean allowEmptyInput,
             Function<String, T> parser,
             String parserErrorMessage,
             Predicate<T> validator,
@@ -22,7 +23,7 @@ public final class ConsoleInputReader {
             System.out.println(consoleMessage);
             String input = scanner.nextLine().trim();
 
-            if (input.isEmpty()) {
+            if (!allowEmptyInput && input.isEmpty()) {
                 continue;
             }
 
