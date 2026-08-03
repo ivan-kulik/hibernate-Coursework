@@ -55,4 +55,23 @@ public class ClientRepository {
                     .uniqueResult() > 0;
         });
     }
+
+    public boolean deleteByName(String name) {
+        return this.transactionExecutor.executeInTransaction(session -> {
+            String hqlQuery = """
+                select c from Client c
+                where c.name = :name
+                """;
+            Client client = session.createQuery(hqlQuery, Client.class)
+                    .setParameter("name", name)
+                    .uniqueResultOptional()
+                    .orElse(null);
+
+            if (client != null) {
+                session.remove(client);
+                return true;
+            }
+            return false;
+        });
+    }
 }
