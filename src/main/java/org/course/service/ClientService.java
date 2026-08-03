@@ -30,15 +30,15 @@ public class ClientService {
         return client.getId();
     }
 
-    public boolean isClientExistByName(String name) {
+    public boolean existsByName(String name) {
         return this.clientRepository.existsByName(name);
     }
 
-    public boolean isClientExistByEmail(String email) {
+    public boolean existsByEmail(String email) {
         return this.clientRepository.existsByEmail(email);
     }
 
-    public boolean isProfileExistByPhone(String phone) {
+    public boolean existsByPhone(String phone) {
         return this.clientRepository.existsByPhone(phone);
     }
 

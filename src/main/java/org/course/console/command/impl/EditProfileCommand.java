@@ -76,7 +76,7 @@ public class EditProfileCommand implements ConsoleCommand {
                 "Phone number must contain only digits.",
                 val -> {
                     if (!val.isBlank() && !val.equals(currentPhone)) {
-                        if (this.clientService.isProfileExistByPhone(val)) {
+                        if (this.clientService.existsByPhone(val)) {
                             throw new IllegalArgumentException("Client with this phone already exists.");
                         }
                     }
