@@ -30,6 +30,10 @@ public class ClientService {
         return client.getId();
     }
 
+    public boolean existById(Long id) {
+        return this.clientRepository.existsById(id);
+    }
+
     public boolean existsByName(String name) {
         return this.clientRepository.existsByName(name);
     }

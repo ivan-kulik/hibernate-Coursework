@@ -19,6 +19,18 @@ public class ClientRepository {
         });
     }
 
+    public boolean existsById(Long id) {
+        return this.transactionExecutor.executeInTransaction(session -> {
+            String hqlQuery = """
+                select count(c) from Client c
+                where c.id = :id
+                """;
+            return session.createQuery(hqlQuery, Long.class)
+                    .setParameter("id", id)
+                    .uniqueResult() > 0;
+        });
+    }
+
     public boolean existsByName(String name) {
         return this.transactionExecutor.executeInTransaction(session -> {
             String hqlQuery = """
