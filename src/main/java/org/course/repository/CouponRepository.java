@@ -1,6 +1,5 @@
 package org.course.repository;
 
-import org.course.entity.Client;
 import org.course.entity.Coupon;
 import org.course.repository.util.TransactionExecutor;
 import org.springframework.stereotype.Repository;
@@ -58,10 +57,14 @@ public class CouponRepository {
 
     public void assignCouponToClient(Long clientId, Long couponId) {
         this.transactionExecutor.executeInTransaction(session -> {
-            Client client = session.get(Client.class, clientId);
-            Coupon couponRef = session.getReference(Coupon.class, couponId);
-
-            client.addCoupon(couponRef);
+            String sqlQuery = """
+                    insert into client_coupons (client_id, coupon_id)
+                    values (:clientId, :couponId)
+                    """;
+            session.createNativeQuery(sqlQuery)
+                    .setParameter("clientId", clientId)
+                    .setParameter("couponId", couponId)
+                    .executeUpdate();
         });
     }
 
