@@ -37,7 +37,7 @@ public class AddOrderCommand implements ConsoleCommand {
 
         LocalDate orderDate = askForOrderDate(scanner);
         Integer totalAmount = askForTotalAmount(scanner);
-        Long orderId = this.orderService.saveOrder(client.getId(), orderDate, totalAmount);
+        Long orderId = this.orderService.createOrder(client.getId(), orderDate, totalAmount);
 
         System.out.printf("Order with id=%d was successfully saved. \n", orderId);
     }

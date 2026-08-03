@@ -16,7 +16,7 @@ public class OrderService {
         this.orderRepository = orderRepository;
     }
 
-    public Long saveOrder(Long clientId, LocalDate orderDate, Integer totalAmount) {
+    public Long createOrder(Long clientId, LocalDate orderDate, Integer totalAmount) {
         Order order = new Order(orderDate, totalAmount, OrderStatus.NEW);
         this.orderRepository.save(clientId, order);
         return order.getId();
