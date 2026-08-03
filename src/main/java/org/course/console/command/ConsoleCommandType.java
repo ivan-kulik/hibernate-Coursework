@@ -10,7 +10,9 @@ public enum ConsoleCommandType {
 
     ADD_ORDER,
 
-    EDIT_COUPONS,
+    ADD_COUPON,
+
+    EDIT_COUPON,
 
     FIND_ORDERS,
 
