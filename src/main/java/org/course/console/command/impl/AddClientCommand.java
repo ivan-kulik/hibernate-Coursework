@@ -1,5 +1,7 @@
-package org.course.console.command;
+package org.course.console.command.impl;
 
+import org.course.console.command.ConsoleCommand;
+import org.course.console.command.ConsoleCommandType;
 import org.course.console.util.ConsoleInputReader;
 import org.course.service.ClientService;
 import org.springframework.stereotype.Component;

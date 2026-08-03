@@ -1,6 +1,8 @@
-package org.course.console.command;
+package org.course.console.command.impl;
 
 import org.course.console.ApplicationLifecycle;
+import org.course.console.command.ConsoleCommand;
+import org.course.console.command.ConsoleCommandType;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
