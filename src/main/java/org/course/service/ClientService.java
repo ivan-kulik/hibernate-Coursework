@@ -42,6 +42,14 @@ public class ClientService {
         return this.clientRepository.existsByPhone(phone);
     }
 
+    public Client findClientByName(String name) {
+        return this.clientRepository.findByName(name);
+    }
+
+    public void updateProfile(Long clientId, String newAddress, String newPhone) {
+        this.clientRepository.updateProfile(clientId, newAddress, newPhone);
+    }
+
     public boolean deleteClientByName(String name) {
         return this.clientRepository.deleteByName(name);
     }
