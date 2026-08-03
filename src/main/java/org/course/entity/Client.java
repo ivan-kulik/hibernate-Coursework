@@ -37,18 +37,13 @@ public class Client {
     @Setter(AccessLevel.NONE)
     private Long id;
 
-    @Column(name = "name",
-            nullable = false,
-            unique = true)
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    @Column(name = "email",
-            nullable = false,
-            unique = true)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "registration_date",
-            nullable = false)
+    @Column(name = "registration_date", nullable = false)
     @CreationTimestamp
     private LocalDate registrationDate;
 
@@ -67,7 +62,7 @@ public class Client {
     @Setter(AccessLevel.NONE)
     private List<Order> orders = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "client_coupons",
             joinColumns = @JoinColumn(
@@ -101,5 +96,15 @@ public class Client {
     public void removeOrder(Order order) {
         this.orders.remove(order);
         order.setClient(null);
+    }
+
+    public void addCoupon(Coupon coupon) {
+        this.coupons.add(coupon);
+        coupon.getClients().add(this);
+    }
+
+    public void removeCoupon(Coupon coupon) {
+        this.coupons.remove(coupon);
+        coupon.getClients().remove(this);
     }
 }
