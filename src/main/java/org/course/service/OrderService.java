@@ -6,6 +6,7 @@ import org.course.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Collection;
 
 @Service
 public class OrderService {
@@ -20,5 +21,9 @@ public class OrderService {
         Order order = new Order(orderDate, totalAmount, OrderStatus.NEW);
         this.orderRepository.save(clientId, order);
         return order.getId();
+    }
+
+    public Collection<Order> findOrdersByStatus(OrderStatus orderStatus) {
+        return this.orderRepository.findByStatus(orderStatus);
     }
 }
