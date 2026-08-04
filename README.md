@@ -1,7 +1,7 @@
 ## Learning Hibernate with Spring
 
 This repository contains a simple educational project designed to reinforce fundamental concepts of 
-**Hibernate** and **Spring Data JPA** in a **Spring** application, using **PostgreSQL** as the DBMS.
+**Hibernate** in a **Spring** application, using **PostgreSQL** as the DBMS.
 
 ### Purpose
 
@@ -10,72 +10,75 @@ The main goal of this project is to provide a practical example for learning how
 - Configure Hibernate with Spring.
 - Map Java entities to database tables using JPA annotations.
 - Work with different types of entity relationships (e.g., One-to-Many, Many-to-One).
-- Use Spring Data JPA repositories for database operations.
 - Interact with a PostgreSQL database.
-- Use Docker & Docker Compose for containerization.
+- Use Docker for containerization.
 
 ### Technology Stack
 
 - Language: Java
 - Framework: Spring
-- ORM: Hibernate (via Spring Data JPA)
+- ORM: Hibernate
 - Database: PostgreSQL
-- Containerization: Docker, Docker Compose
+- Containerization: Docker
 - Build Tool: Maven
 
 ### Getting Started
 
 #### Prerequisites
 
-- Java Development Kit (JDK) 17 or later.
-- Maven or Gradle.
-- Docker and Docker Compose installed on your machine.
+- Java Development Kit (JDK) 24 or later.
+- Maven.
+- Docker installed on your machine.
 
 #### Setup
 
-1.  **Clone the repository:**
+1. Clone the repository:
     ```bash
     git clone https://github.com/ivan-kulik/hibernate-Coursework.git
     ```
-2.  **Build the application:**
+2. Setup database \
+Start by launching the PostgreSQL database in a Docker container. 
+This setup uses a named volume (`postgres_data`) to ensure your database tables and records persist even if the container is stopped or removed.
+
+Start the database:
+   ```bash
+   docker run -d \
+     --name course-db \
+     -p 5432:5432 \
+     -e POSTGRES_USER=postgres \
+     -e POSTGRES_PASSWORD=root \
+     -e POSTGRES_DB=course_db \
+     -v postgres_data:/var/lib/postgresql/data \
+     postgres:15-alpine
+   ```
+Database management commands:
+
+* Stop the database container:
+   ```bash
+   docker stop course-db
+    ```
+* Remove the database container (this does not delete your saved data):
+   ```bash
+   docker rm course-db
+    ```
+* Reset all data (Delete the volume): \
+If you want to completely wipe the database and start fresh, 
+stop and remove the container first, then delete the volume:
+   ```bash
+   docker stop course-db
+   docker rm course-db
+   docker volume rm postgres_data
+    ```
+
+3. Build the application:
     ```bash
     mvn clean package
-    # or with Gradle: ./gradlew bootJar
     ```
-3.  **Run with Docker Compose:**
-    ```bash
-    docker-compose up -d
+   
+4. Run the application:
+   ```bash
+   java -jar target/hibernate-Coursework-1.0-SNAPSHOT.jar
     ```
-    This command will:
-    - Start a PostgreSQL container.
-    - Build and start the Spring application container.
-    - Connect the application to the database.
-
-4.  **View logs:**
-    ```bash
-    docker-compose logs -f app
-    ```
-
-5.  **Stop the application:**
-    ```bash
-    docker-compose down
-    ```
-    To also remove the database volume (reset all data):
-    ```bash
-    docker-compose down -v
-    ```
-
-#### Docker Configuration Files
-
-##### Dockerfile
-
-The `Dockerfile` in the root directory is used to build the Spring application image:
-
-```dockerfile
-FROM openjdk:17-jdk-slim
-COPY target/*.jar app.jar
-ENTRYPOINT ["java", "-jar", "/app.jar"]
-```
 
 ### License
 
