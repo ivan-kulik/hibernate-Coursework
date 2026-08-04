@@ -52,7 +52,7 @@ public class ConsoleListener {
         this.commandRegistry.getAllCommands().stream()
                 .map(ConsoleCommand::getDescription)
                 .forEach(System.out::println);
-        System.out.println("Enter the command number:");
+        System.out.println("Enter the command:");
         System.out.print("> ");
     }
 }
